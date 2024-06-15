@@ -24,3 +24,7 @@ body {
   font-size: small;
   tab-size: 4;
 }
+
+p {
+	white-space: pre;
+}
