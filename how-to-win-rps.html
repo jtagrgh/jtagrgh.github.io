@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+<p style="white-space: pre-wrap;"
+
+>How to Win at Rock Paper Scissors and Influence People 
+
+
+Yesterday, I was inspired to see if I could beat a SARSA-based bot at
+tic-tac-toe, and I found some fun results.
+
+In my formulation of the game, there's a SARSA bot and a player. The player's
+last action, which can be rock, paper, or scissors is the state that the bot
+acts from. The bot gets +1 if it wins, 0 if it draws, and -1 if it loses.
+
+At first, I manually played against the bot, but that was taking too long to
+show any asymptotic behaviour, so I devised some strategies to pit against the
+bot.
+
+The strategies are:
+	- Strange Human Strategy:
+		- if bot did rock last time, do paper.
+		- if bot did paper last time, do scissors.
+		- if bot did scissors last time, do rock.
+
+	- Random:
+		1:1:1 chance of rock, paper, or scissors.
+
+	- Almost Random:
+		34:33:33 (slight rock favouring).
+
+	- Mostly Random:
+		30:30:40 (bigger scissors favouring).
+
+	- Numberphile:
+		I took this from a tldr of a Numberphile video on reddit so it
+		may not be correct, but it represents something a human could do.
+		It goes like:
+			- if lose, do next what would have just beaten the opponent.
+			- if win, do next what your opponent just did.
+
+	- Always Rock:
+		Always rock.
+
+I took each strategy and ran them 10 times for 100000 tries each. These were
+the results:
+	- Strange Human Strategy:
+		Totals: [-4775, -4373, -4660, -4562, -4295, -4716, 
+				 -4662, -4413, -4375, -4500]
+		Mean: -4533.1
+
+	- Random:
+		Totals: [-154, 177, -728, -742, -120, -45, 270, 288, -276, 235] 
+		Mean: -109.5
+
+	- Almost Random:
+		Totals: [-190, 8, -285, -140, 121, -110, -109, -149, 430, -33]
+		Mean: -45.7
+	
+	- Mostly Random:
+		Totals: [2622, 3792, 3346, 3102, 3051, 2860, 2561, 3056, 2687, 2803]
+		Mean: 2988.0
+
+	- Numberphile:
+		Totals: [53396, 53642, 54643, 56009, 54086, 56398, 
+				 52026, 52393, 53793, 53095]
+		Mean: 53948.1
+
+	- Always Rock:
+		Totals: [89208, 89375, 89444, 89664, 89284, 89514, 
+				 89541, 89556, 89329, 89392]
+		Mean: 89430.7
+
+
+There were a few cool things that I hadn't fully expected. The first was how
+bad the Numberphile strategy did. I did not expect the bot to develop a policy
+to win given only the last player action. I think this is because the strategy
+ends up being entirely dependent on the last player action, something like:
+	
+	(P, S) or (P, R) => do R
+	(S, R) or (S, P) => do P
+	(R, P) or (R, S) => do S
+
+The other thing that surprised me was that the Random Strategy wasn't bad. I
+don't know how to prove this, but it seems intuitive that being random leaves
+nothing for the bot to learn. But given some imperfect randomness, as with the
+Mostly Random strategy, the bot can learn to generally try to beat the player's
+favoured move. The bot probably doesn't even need state to learn that. Finally,
+it was cool that the Strange Human Strategy did so well, despite seeming so
+predictable. I think it didn't do poorly because it's actions are a function of
+state that the bot doesn't see. But I expect that if I added that state into
+the bot, it would learn to beat the player. What I'm particularly surprised by
+is that the Strange Human Strategy didn't just not fail, but positively won!
+That will be something to explore next, hopefully I didn't just make an error
+in design.
+
+</p>
+</body>
+</html>
+
