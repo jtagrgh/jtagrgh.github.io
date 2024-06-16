@@ -6,12 +6,12 @@
 <link href="styles.css" rel="stylesheet" />
 </head>
 <body>
-<p>How to Win at Rock Paper Scissors and Influence People 
+<p>How to Beat a Robot at Rock Paper Scissors
 
 <a href="https://github.com/jtagrgh/SARSA-Study-Rock-Paper-Scissors">Repository.</a>
 
 Yesterday, I was inspired to see if I could beat a SARSA-based bot at
-Tic-tac-toe, and I found some fun results.
+Rock Paper Scissors and I found some fun results.
 
 In my formulation of the game, there's a SARSA bot and a player. The player's
 last action, which can be rock, paper, or scissors is the state that the bot
@@ -75,11 +75,11 @@ the results:
 				 89541, 89556, 89329, 89392]
 		Mean: 89430.7
 
-
-There were a few cool things that I hadn't fully expected. The first was how
-bad the Numberphile strategy did. I did not expect the bot to develop a policy
-to win given only the last player action. I think this is because the strategy
-ends up being entirely dependent on the last player action, something like:
+There were a few cool things that I hadn't fully expected. First was how bad
+the Numberphile strategy did. I did not expect the bot to develop a policy to
+win given only the last player action. I think this is because the player's
+strategy ends up being entirely dependent on the last player action, something
+like:
 	
 	(P, S) or (P, R) => do R
 	(S, R) or (S, P) => do P
@@ -95,8 +95,6 @@ predictable. I think it didn't do poorly because it's actions are a function of
 state that the bot doesn't see. But I expect that if I added that state into
 the bot, it would learn to beat the player. What I'm particularly surprised by
 is that the Strange Human Strategy didn't just not fail, but positively won!
-That will be something to explore next, hopefully I didn't just make an error
-in design.
 
 </p>
 </body>
