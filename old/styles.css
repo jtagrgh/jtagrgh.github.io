@@ -1,0 +1,30 @@
+@font-face {
+	font-family: 'Computer Modern Serif';
+	src: url('cmunrm.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Computer Modern Concrete';
+	src: url('cmunorm.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Computer Modern Typewriter';
+	src: url('cmuntt.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+  font-family: "Computer Modern Typewriter", monospace;
+  font-size: small;
+  tab-size: 4;
+}
+
+p {
+	white-space: pre;
+}
